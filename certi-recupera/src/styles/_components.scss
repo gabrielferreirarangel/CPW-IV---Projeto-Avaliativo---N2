@@ -1,0 +1,524 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// --- BUTTONS ---
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  border-radius: $radius-md;
+  transition: $transition-fast;
+  font-family: $font-primary;
+  border: 1px solid transparent;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  @include click-scale;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  &:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: $shadow-glow-primary;
+  }
+}
+
+.btn-secondary {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+
+  &:hover {
+    background-color: var(--border-color);
+  }
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  color: #ffffff;
+
+  &:hover {
+    background-color: var(--color-success-hover);
+    box-shadow: $shadow-glow-success;
+  }
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: #ffffff;
+
+  &:hover {
+    background-color: var(--color-danger-hover);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+}
+
+.btn-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.8s linear infinite;
+
+  // If button is outline or secondary, spinner should match text color
+  .btn-outline & {
+    border-top-color: var(--color-primary);
+    border-color: rgba(99, 102, 241, 0.2);
+  }
+
+  .btn-secondary & {
+    border-top-color: var(--text-primary);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+// --- CARDS ---
+.card {
+  @include glass-panel;
+  border-radius: $radius-lg;
+  padding: 1.5rem;
+  transition: $transition-normal;
+  background-color: var(--bg-secondary);
+
+  &.card-interactive {
+    @include hover-lift;
+    cursor: pointer;
+  }
+}
+
+// Metric Card specific styles
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+
+  .metric-icon-wrapper {
+    @include flex-center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: $radius-md;
+    background-color: var(--bg-tertiary);
+    color: var(--color-primary);
+    transition: $transition-normal;
+
+    &.primary {
+      background-color: var(--color-primary-light);
+      color: var(--color-primary);
+    }
+
+    &.success {
+      background-color: var(--color-success-light);
+      color: var(--color-success);
+    }
+
+    &.warning {
+      background-color: var(--color-warning-light);
+      color: var(--color-warning);
+    }
+
+    &.danger {
+      background-color: var(--color-danger-light);
+      color: var(--color-danger);
+    }
+  }
+
+  .metric-info {
+    display: flex;
+    flex-direction: column;
+
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .metric-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+  }
+
+  // Soft design glow behind metrics
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+  }
+}
+
+
+// --- INPUTS ---
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    border-radius: $radius-md;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    transition: $transition-fast;
+    overflow: hidden;
+
+    &:focus-within {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+
+    svg {
+      position: absolute;
+      left: 1rem;
+      color: var(--text-tertiary);
+      width: 1.25rem;
+      height: 1.25rem;
+      pointer-events: none;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+
+      &::placeholder {
+        color: var(--text-tertiary);
+      }
+    }
+
+    // Adjust padding if an icon is present
+    &.has-icon {
+
+      input,
+      select,
+      textarea {
+        padding-left: 2.75rem;
+      }
+    }
+  }
+
+  .error-text {
+    font-size: 0.75rem;
+    color: var(--color-danger);
+    font-weight: 500;
+  }
+}
+
+
+// --- BADGES ---
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+
+  svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &.badge-ativo {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+  }
+
+  &.badge-vencido {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+  }
+
+  &.badge-avisado {
+    background-color: var(--color-secondary-light);
+    color: var(--color-secondary);
+  }
+
+  &.badge-pendente {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+  }
+}
+
+
+// --- TOAST NOTIFICATIONS ---
+.toast-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 420px;
+  width: calc(100% - 3rem);
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  @include glass-panel;
+  border-radius: $radius-md;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  box-shadow: $shadow-lg;
+  transform: translateY(0);
+  transition: $transition-normal;
+  @include animate-fade-in(0.35s);
+
+  &.toast-success {
+    border-left: 4px solid var(--color-success);
+  }
+
+  &.toast-error {
+    border-left: 4px solid var(--color-danger);
+  }
+
+  &.toast-warning {
+    border-left: 4px solid var(--color-warning);
+  }
+
+  &.toast-info {
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .toast-icon {
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+
+    &.success {
+      color: var(--color-success);
+    }
+
+    &.error {
+      color: var(--color-danger);
+    }
+
+    &.warning {
+      color: var(--color-warning);
+    }
+
+    &.info {
+      color: var(--color-primary);
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .toast-content {
+    flex: 1;
+
+    .toast-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .toast-message {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-top: 0.125rem;
+      line-height: 1.4;
+    }
+  }
+
+  .toast-close {
+    background: transparent;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0.125rem;
+    border-radius: $radius-sm;
+    transition: $transition-fast;
+
+    &:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+// Network Status Toast (Global Header Alert)
+.network-status-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  @include flex-center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+  transition: transform 0.3s ease;
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  &.offline {
+    background-color: var(--color-danger);
+    color: #ffffff;
+  }
+
+  &.online {
+    background-color: var(--color-success);
+    color: #ffffff;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+// --- TABLES ---
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: $radius-md;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+  @include custom-scroll;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9375rem;
+
+  th,
+  td {
+    padding: 1rem 1.25rem;
+  }
+
+  th {
+    background-color: var(--bg-tertiary);
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.15s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: rgba(99, 102, 241, 0.02);
+    }
+  }
+
+  td {
+    color: var(--text-primary);
+  }
+}
+
+// Empty State Styling
+.empty-state {
+  @include flex-center;
+  @include flex-column;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+
+  .empty-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    max-width: 320px;
+    margin-bottom: 1.5rem;
+  }
+}
