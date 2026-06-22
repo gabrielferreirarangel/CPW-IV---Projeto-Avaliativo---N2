@@ -3,7 +3,8 @@
 
 ## 5.1 Identificação
 **Nome do projeto:** CertiRecupera  
-**Descrição:** Feito excluisivamente para N2 de CPW IV porem como real possivel reformulação do frontend de CertiRecupera em PWA. Permite simular avisos via WhatsApp e funciona 100% offline utilizando LocalStorage e Service Workers.
+**Descrição:** Feito excluisivamente para N2 de CPW IV porem como real possivel reformulação do frontend de CertiRecupera em PWA.
+ Permite simular avisos via WhatsApp e funciona 100% offline utilizando LocalStorage e Service Workers.
 
 ---
 
