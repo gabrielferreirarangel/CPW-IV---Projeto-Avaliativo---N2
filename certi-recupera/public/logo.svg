@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+    
+    <!-- Shield Outline Gradient -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+
+    <!-- Glass Overlay Gradient -->
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background for maskable icon compliance -->
+  <rect width="512" height="512" rx="112" fill="#090d16" />
+
+  <!-- Outer Ring Glow -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="url(#shieldGrad)" stroke-width="8" stroke-dasharray="15 10" opacity="0.4" />
+
+  <!-- The Shield Body -->
+  <path d="M256,70 C310,70 380,90 410,130 C410,250 360,360 256,430 C152,360 102,250 102,130 C132,90 202,70 256,70 Z" 
+        fill="url(#bgGrad)" 
+        stroke="url(#shieldGrad)" 
+        stroke-width="12" 
+        stroke-linejoin="round" />
+
+  <!-- Shield Left Half shading for 3D effect -->
+  <path d="M256,70 C202,70 132,90 102,130 C102,250 152,360 256,430 Z" 
+        fill="#000000" 
+        opacity="0.15" />
+
+  <!-- Inner Digital Lock / Checkmark -->
+  <g transform="translate(186, 176)">
+    <!-- Lock Loop -->
+    <path d="M70,70 L70,45 C70,25 90,10 110,10 C130,10 150,25 150,45 L150,70" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="16" 
+          stroke-linecap="round" />
+    
+    <!-- Lock Box -->
+    <rect x="40" y="70" width="140" height="110" rx="20" fill="#ffffff" />
+    
+    <!-- Lock Keyhole / Checkmark -->
+    <path d="M85,125 L105,145 L145,100" 
+          fill="none" 
+          stroke="url(#bgGrad)" 
+          stroke-width="14" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+  </g>
+
+  <!-- Interactive/Modern Glass overlay top-right to bottom-left -->
+  <path d="M256,76 L404,134 C404,244 358,344 256,418 Z" 
+        fill="url(#glassGrad)" />
+</svg>
